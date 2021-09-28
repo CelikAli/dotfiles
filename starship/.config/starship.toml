@@ -1,0 +1,6 @@
+[character]
+success_symbol = "[->](regular white)"
+error_symbol = "[->](bold red)"
+
+[directory]
+format = '[\[$path\]]($style) '
