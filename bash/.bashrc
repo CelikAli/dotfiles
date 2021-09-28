@@ -15,6 +15,10 @@ export PATH
 EDITOR=nvim
 export EDITOR
 
+# Add other environment variables
+if [ -f .env ]; then
+	. .env
+fi
 
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
