@@ -11,24 +11,41 @@ local themes_path = gfs.get_themes_dir()
 
 local theme = {}
 
-theme.font          = "JetBrainsMono NF 12"
+theme.font          = "MesloLGS Nerd Font 12"
 
-theme.bg_normal     = "#282828"
-theme.bg_focus      = "#ebdbb2"
-theme.bg_urgent     = "#cc241d"
-theme.bg_minimize   = "#928374"
+theme.color0        = "#282828"
+theme.color1        = "#cc241d"
+theme.color2        = "#98971a"
+theme.color3        = "#d79921"
+theme.color4        = "#458588"
+theme.color5        = "#b16286"
+theme.color6        = "#689d6a"
+theme.color7        = "#a89984"
+theme.color8        = "#928374"
+theme.color9        = "#fb4934"
+theme.color10       = "#b8bb26"
+theme.color11       = "#fabd2f"
+theme.color12       = "#83a598"
+theme.color13       = "#d3869b"
+theme.color14       = "#8ec07c"
+theme.color15       = "#ebdbb2"
+
+theme.bg_normal     = theme.color0
+theme.bg_focus      = theme.color15
+theme.bg_urgent     = theme.color1
+theme.bg_minimize   = theme.color8
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = "#ebdbb2"
-theme.fg_focus      = "#282828"
-theme.fg_urgent     = "#ebdbb2"
-theme.fg_minimize   = "#ebdbb2"
+theme.fg_normal     = theme.color15
+theme.fg_focus      = theme.color0
+theme.fg_urgent     = theme.color15
+theme.fg_minimize   = theme.color15
 
 theme.useless_gap   = dpi(5)
 theme.border_width  = dpi(2)
-theme.border_normal = "#282828"
-theme.border_focus  = "#ebdbb2"
-theme.border_marked = "#689d6a"
+theme.border_normal = theme.color0
+theme.border_focus  = theme.color15
+theme.border_marked = theme.color6
 
 -- There are other variable sets
 -- overriding the default one when

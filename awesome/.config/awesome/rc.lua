@@ -14,6 +14,10 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
+
+-- Vicious widget library
+local vicious = require("vicious")
+
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
@@ -89,8 +93,34 @@ awful.layout.layouts = {
 mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
+
+local function textColor(text, color)
+    return "<span color='" .. color .. "'>" .. text .. "</span>"
+end
+
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
+
+-- Create a cpu widget
+cpuwidget = wibox.widget.textbox()
+vicious.cache(vicious.widgets.cpu)
+vicious.register(cpuwidget, vicious.widgets.cpu, textColor(" $1%", beautiful.color9))
+
+-- Create a memory widget
+memwidget = wibox.widget.textbox()
+vicious.cache(vicious.widgets.mem)
+vicious.register(memwidget, vicious.widgets.mem, textColor(" $2MiB / $3MiB", beautiful.color10))
+
+-- Create a storage widget
+fswidget = wibox.widget.textbox()
+vicious.register(fswidget, vicious.widgets.fs, textColor(" ${/ used_gb}GiB / ${/ size_gb}GiB", beautiful.color11), 60)
+
+-- Create a package widget
+pkgwidget = wibox.widget.textbox()
+vicious.register(pkgwidget, vicious.widgets.pkg, textColor(" $1", beautiful.color12), 60, "Fedora")
+
+separator = wibox.widget.textbox()
+separator.text = " | "
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -167,6 +197,14 @@ awful.screen.connect_for_each_screen(function(s)
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
+            cpuwidget,
+            separator,
+            memwidget,
+            separator,
+            fswidget,
+            separator,
+            pkgwidget,
+            separator,
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
             wibox.widget.systray(),
@@ -408,6 +446,7 @@ awful.rules.rules = {
         properties = { tag = "9" } },
 
 }
+
 -- }}}
 
 -- {{{ Signals
@@ -447,9 +486,11 @@ screen.connect_signal("arrange", function (s)
 end)
 
 -- Startup scripts
+awful.spawn.with_shell("killall pasystray")
 awful.spawn.with_shell("xrandr --output DP-0 --mode 2560x1440 --rate 144 &")
 awful.spawn.with_shell("xset r rate 300 50 &")
 awful.spawn.with_shell("picom &")
 awful.spawn.with_shell("nm-applet &")
 awful.spawn.with_shell("pasystray &")
+awful.spawn.with_shell("blueman-applet &")
 awful.spawn.with_shell("Discord &")
