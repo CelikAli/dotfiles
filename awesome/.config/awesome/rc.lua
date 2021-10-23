@@ -115,10 +115,6 @@ vicious.register(memwidget, vicious.widgets.mem, textColor(" $2MiB / $3MiB", 
 fswidget = wibox.widget.textbox()
 vicious.register(fswidget, vicious.widgets.fs, textColor(" ${/ used_gb}GiB / ${/ size_gb}GiB", beautiful.color11), 60)
 
--- Create a package widget
-pkgwidget = wibox.widget.textbox()
-vicious.register(pkgwidget, vicious.widgets.pkg, textColor(" $1", beautiful.color12), 60, "Fedora")
-
 separator = wibox.widget.textbox()
 separator.text = " | "
 
@@ -202,8 +198,6 @@ awful.screen.connect_for_each_screen(function(s)
             memwidget,
             separator,
             fswidget,
-            separator,
-            pkgwidget,
             separator,
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
