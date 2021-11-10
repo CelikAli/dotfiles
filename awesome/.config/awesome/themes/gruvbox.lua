@@ -31,9 +31,9 @@ theme.color14       = "#8ec07c"
 theme.color15       = "#ebdbb2"
 
 theme.bg_normal     = theme.color0
-theme.bg_focus      = theme.color15
+theme.bg_focus      = theme.color7
 theme.bg_urgent     = theme.color1
-theme.bg_minimize   = theme.color8
+theme.bg_minimize   = theme.color3
 theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = theme.color15
@@ -51,9 +51,8 @@ theme.border_marked = theme.color6
 -- overriding the default one when
 -- defined, the sets are:
 -- taglist_[bg|fg]_[focus|urgent|occupied|empty|volatile]
+taglist_fg_empty= theme.color8
 -- tasklist_[bg|fg]_[focus|urgent]
-theme.tasklist_bg_focus = theme.bg_normal
-theme.tasklist_fg_focus = theme.fg_normal
 -- titlebar_[bg|fg]_[normal|focus]
 -- tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]
 -- mouse_finder_[color|timeout|animate_timeout|radius|factor]

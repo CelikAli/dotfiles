@@ -55,7 +55,7 @@ beautiful.gap_single_client = false
 -- This is used later as the default terminal and editor to run.
 terminal = "kitty"
 browser = "firefox"
-texteditor = "emacs"
+texteditor = "emacsclient -c"
 launcher = "rofi -modi drun -show drun -show-icons"
 termeditor = os.getenv("EDITOR") or "nvim"
 editor_cmd = terminal .. " -e " .. termeditor
@@ -104,19 +104,19 @@ mytextclock = wibox.widget.textclock()
 -- Create a cpu widget
 cpuwidget = wibox.widget.textbox()
 vicious.cache(vicious.widgets.cpu)
-vicious.register(cpuwidget, vicious.widgets.cpu, textColor(" $1%", beautiful.color9))
+vicious.register(cpuwidget, vicious.widgets.cpu, textColor("  $1%", beautiful.color9))
 
 -- Create a memory widget
 memwidget = wibox.widget.textbox()
 vicious.cache(vicious.widgets.mem)
-vicious.register(memwidget, vicious.widgets.mem, textColor(" $2MiB / $3MiB", beautiful.color10))
+vicious.register(memwidget, vicious.widgets.mem, textColor("  $2MiB / $3MiB", beautiful.color10))
 
 -- Create a storage widget
 fswidget = wibox.widget.textbox()
-vicious.register(fswidget, vicious.widgets.fs, textColor(" ${/ used_gb}GiB / ${/ size_gb}GiB", beautiful.color11), 60)
+vicious.register(fswidget, vicious.widgets.fs, textColor("  ${/ used_gb}GiB / ${/ size_gb}GiB", beautiful.color11), 60)
 
 separator = wibox.widget.textbox()
-separator.text = " | "
+separator.text = " |"
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -177,7 +177,7 @@ awful.screen.connect_for_each_screen(function(s)
     -- Create a tasklist widget
     s.mytasklist = awful.widget.tasklist {
         screen  = s,
-        filter  = awful.widget.tasklist.filter.focused,
+        filter  = awful.widget.tasklist.filter.currenttags,
         buttons = tasklist_buttons
     }
 
@@ -487,4 +487,4 @@ awful.spawn.with_shell("picom &")
 awful.spawn.with_shell("nm-applet &")
 awful.spawn.with_shell("pasystray &")
 awful.spawn.with_shell("blueman-applet &")
-awful.spawn.with_shell("Discord &")
+awful.spawn.with_shell("emacs --daemon &")
