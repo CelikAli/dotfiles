@@ -297,7 +297,12 @@ globalkeys = gears.table.join(
     awful.key({ modkey },            "t",     function() awful.spawn(texteditor) end,
               {description = "open text editor", group = "launcher"}),
     awful.key({ modkey },            "r",     function () awful.spawn(launcher) end,
-              {description = "open launcher", group = "launcher"})
+              {description = "open launcher", group = "launcher"}),
+
+    -- System
+    awful.key({ modkey },            "l",     function () awful.spawn("i3lock -c 000000") end,
+              {description = "lock screen", group = "system"})
+
 
 )
 
@@ -480,11 +485,11 @@ screen.connect_signal("arrange", function (s)
 end)
 
 -- Startup scripts
-awful.spawn.with_shell("killall pasystray")
 awful.spawn.with_shell("xrandr --output DP-0 --mode 2560x1440 --rate 144 &")
 awful.spawn.with_shell("xset r rate 300 50 &")
 awful.spawn.with_shell("picom &")
 awful.spawn.with_shell("nm-applet &")
-awful.spawn.with_shell("pasystray &")
+awful.spawn.with_shell("ps -C pasystray >/dev/null || pasystray &")
 awful.spawn.with_shell("blueman-applet &")
+awful.spawn.with_shell("lxpolkit &")
 awful.spawn.with_shell("emacs --daemon &")
