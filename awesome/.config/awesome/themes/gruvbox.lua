@@ -1,7 +1,3 @@
----------------------------
--- Default awesome theme --
----------------------------
-
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
@@ -12,6 +8,7 @@ local themes_path = gfs.get_themes_dir()
 local theme = {}
 
 theme.font          = "MesloLGS Nerd Font 12"
+theme.volume_font   = "MesloLGS Nerd Font 20"
 
 theme.color0        = "#282828"
 theme.color1        = "#cc241d"
@@ -33,13 +30,13 @@ theme.color15       = "#ebdbb2"
 theme.bg_normal     = theme.color0
 theme.bg_focus      = "#504945"
 theme.bg_urgent     = theme.color1
-theme.bg_minimize   = theme.color3
+theme.bg_minimize   = theme.color6
 theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = theme.color15
 theme.fg_focus      = theme.color15
 theme.fg_urgent     = theme.color15
-theme.fg_minimize   = theme.color15
+theme.fg_minimize   = theme.color0
 
 theme.useless_gap   = dpi(5)
 theme.border_width  = dpi(2)

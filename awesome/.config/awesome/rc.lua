@@ -216,6 +216,17 @@ root.buttons(gears.table.join(
 ))
 -- }}}
 
+local show_volume_notification = function()
+    awful.spawn.easy_async_with_shell("getvol",
+        function(out) naughty.notify({
+                    text = out,
+                    timeout = 1,
+                    position = "bottom_middle",
+                    replaces_id = -1,
+                    font = beautiful.volume_fonf})
+        end)
+end
+
 -- {{{ Key bindings
 globalkeys = gears.table.join(
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
@@ -284,11 +295,28 @@ globalkeys = gears.table.join(
               {description = "select next", group = "layout"}),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
               {description = "select previous", group = "layout"}),
+    awful.key({ modkey, "Control" }, "m",
+              function ()
+                  local c = awful.client.restore()
+                  -- Focus restored client
+                  if c then
+                    c:emit_signal(
+                        "request::activate", "key.unminimize", {raise = true}
+                    )
+                  end
+              end,
+              {description = "restore minimized", group = "client"}),
 
     -- Volume
-    awful.key({ }, "XF86AudioRaiseVolume", function () awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%") end,
+    awful.key({ }, "XF86AudioRaiseVolume", function ()
+            awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%")
+            show_volume_notification()
+    end,
               {description = "increase volume", group = "media"}),
-    awful.key({ }, "XF86AudioLowerVolume", function () awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%") end,
+    awful.key({ }, "XF86AudioLowerVolume", function ()
+            awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%")
+            show_volume_notification()
+    end,
               {description = "decrease volume", group = "media"}),
 
     -- Launcher
@@ -318,8 +346,15 @@ clientkeys = gears.table.join(
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
-              {description = "move to master", group = "client"})
-    )
+              {description = "move to master", group = "client"}),
+    awful.key({ modkey,           }, "m",
+        function (c)
+            -- The client currently has the input focus, so it cannot be
+            -- minimized, since minimized clients can't have the focus.
+            c.minimized = true
+        end ,
+        {description = "minimize", group = "client"})
+)
 
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it work on any keyboard layout.
