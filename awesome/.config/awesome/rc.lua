@@ -217,7 +217,7 @@ root.buttons(gears.table.join(
 -- }}}
 
 local show_volume_notification = function()
-    awful.spawn.easy_async_with_shell("getvol",
+    awful.spawn.easy_async_with_shell("getvol.sh",
         function(out) naughty.notify({
                     text = out,
                     timeout = 1,
