@@ -55,7 +55,7 @@ beautiful.gap_single_client = false
 -- This is used later as the default terminal and editor to run.
 terminal = "kitty"
 browser = "firefox"
-texteditor = "emacsclient -c"
+texteditor = "emacs"
 launcher = "rofi -modi drun -show drun -show-icons"
 termeditor = os.getenv("EDITOR") or "nvim"
 editor_cmd = terminal .. " -e " .. termeditor
@@ -527,4 +527,3 @@ awful.spawn.with_shell("nm-applet &")
 awful.spawn.with_shell("ps -C pasystray >/dev/null || pasystray &")
 awful.spawn.with_shell("blueman-applet &")
 awful.spawn.with_shell("lxpolkit &")
-awful.spawn.with_shell("emacs --daemon &")
