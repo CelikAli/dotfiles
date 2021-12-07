@@ -219,11 +219,11 @@ root.buttons(gears.table.join(
 local show_volume_notification = function()
     awful.spawn.easy_async_with_shell("getvol.sh",
         function(out) naughty.notify({
-                    text = out,
+                    text = "Vol:"..out,
                     timeout = 1,
                     position = "bottom_middle",
                     replaces_id = -1,
-                    font = beautiful.volume_fonf})
+                    font = beautiful.volume_font})
         end)
 end
 
@@ -458,7 +458,8 @@ awful.rules.rules = {
           "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
           "Wpa_gui",
           "veromix",
-          "xtightvncviewer"},
+          "xtightvncviewer",
+  	  "Lxappearance"},
 
         -- Note that the name property shown in xprop might be set slightly after creation of the client
         -- and the name shown there might not match defined rules here.
