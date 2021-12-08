@@ -7,8 +7,8 @@ fi
 
 export EDITOR=nvim
 
-export GOROOT=/usr/local/go
-export GOPATH=$HOME/Repositories/go-projects
+export GOROOT=/usr/lib/golang
+export GOPATH=$HOME/projects/go
 
 # Add other environment variables
 if [ -f ~/.env ]; then
