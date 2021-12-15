@@ -56,7 +56,7 @@ beautiful.gap_single_client = false
 terminal = "kitty"
 browser = "firefox"
 texteditor = "emacs"
-launcher = "rofi -modi drun -show drun -show-icons"
+launcher = "rofi -show drun"
 termeditor = os.getenv("EDITOR") or "nvim"
 editor_cmd = terminal .. " -e " .. termeditor
 
@@ -459,7 +459,8 @@ awful.rules.rules = {
           "Wpa_gui",
           "veromix",
           "xtightvncviewer",
-  	  "Lxappearance"},
+          "Lxappearance",
+          "Pavucontrol"},
 
         -- Note that the name property shown in xprop might be set slightly after creation of the client
         -- and the name shown there might not match defined rules here.
@@ -471,7 +472,10 @@ awful.rules.rules = {
           "ConfigManager",  -- Thunderbird's about:config.
           "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
         }
-      }, properties = { floating = true }},
+    }, properties = { floating = true,
+                      placement = awful.placement.centered
+                    }
+    },
 
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
