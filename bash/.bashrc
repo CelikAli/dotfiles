@@ -18,9 +18,9 @@ if [ -f ~/.env ]; then
 fi
 
 # User specific environment
-if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:$HOME/.emacs.d/bin:$GOPATH/bin:" ]]
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:$HOME/.emacs.d/bin:$GOPATH/bin:$HOME/.npm-global/bin:" ]]
 then
-    PATH="$HOME/.local/bin:$HOME/bin:$HOME/.emacs.d/bin:$GOPATH/bin:$PATH"
+    PATH="$HOME/.local/bin:$HOME/bin:$HOME/.emacs.d/bin:$GOPATH/bin:$HOME/.npm-global/bin:$PATH"
 fi
 export PATH
 
